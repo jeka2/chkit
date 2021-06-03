@@ -16,7 +16,8 @@ class UsersController < ApplicationController
     end
 
     def show
-        @user = User.find(params[:id])
+        #binding.pry
+        @user = User.find_by_id(params[:id])
         if @user
             render json: {
                 user: @user

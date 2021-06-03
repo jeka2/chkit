@@ -21,6 +21,5 @@ class ApplicationController < ActionController::Base
         session[:user_id] = nil
     end
 
-    helper_method :give_token, :logged_in?, :current_user,
-    logout, authorized?
+    helper_method :give_token, :logged_in?, :current_user, :authorized?
 end
