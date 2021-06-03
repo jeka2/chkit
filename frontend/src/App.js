@@ -1,7 +1,9 @@
 import './App.css';
 import React from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import TestComponent from './components/text.component';
+import { authenticateUser, createUser } from './redux/user/user.actions';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,10 +16,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://127.0.0.1:3001/users/1')
-      .then(res => res.json())
-      .then(data => console.log(data))
-    console.log('hi')
+    //this.props.authenticateUser()
   }
 
   handleLogin = (data) => {
@@ -37,6 +36,8 @@ class App extends React.Component {
   render() {
     return(
       <div>
+        <button onClick={() => this.props.createUser()}>Create User</button>
+        <button onClick={() => this.props.authenticateUser()}>Authenticate User</button>
         <Router>
           <Switch>
             <Route exact path='/' component={TestComponent} />
@@ -49,4 +50,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect(null, { authenticateUser, createUser })(App);

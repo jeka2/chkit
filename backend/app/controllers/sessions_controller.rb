@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+    skip_before_action :verify_authenticity_token
     def create
         @user = User.find_by(username: session_params[:username])
 
@@ -22,6 +23,19 @@ class SessionsController < ApplicationController
             status: 200,
             logged_out: true
         }
+    end
+
+    def authenticate
+        if logged_in?
+            token_decode(params[:token])
+            # token decode should return proper user id
+            # then see if current_users session_id matches
+        else
+            render json: {
+                status: 400,
+                errors: ['Please Log In']
+            }
+        end
     end
 
 private

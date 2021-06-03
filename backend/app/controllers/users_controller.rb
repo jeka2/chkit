@@ -1,13 +1,16 @@
-class UsersController < ApplicationController 
+class UsersController < ApplicationController
+    skip_before_action :verify_authenticity_token 
     def create
         @user = User.new(user_params)
-        if @user.save && @user.authenticate(params[:password])
+        if @user.save
             give_token
             render json: { 
                 status: 201,
-                user: @user
+                user: @user.slice(:created_at, :email, :id, :username),
+                token: token_encode({ user_id: @user.id })
             }
         else
+            binding.pry
             render json: {
                 status: 500,
                 errors: @user.errors.full_messages

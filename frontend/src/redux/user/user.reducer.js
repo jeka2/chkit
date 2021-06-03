@@ -1,5 +1,7 @@
 const INITIAL_STATE = {
-    loggedIn: false
+    loggedIn: false,
+    userName: '',
+    email: '',
 }
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -7,9 +9,18 @@ const userReducer = (state = INITIAL_STATE, action) => {
         case 'TOGGLE_SIGNED_IN':
             return {
                 ...state,
-                loggedIn: !loggedIn
+                loggedIn: !state.loggedIn
+            }
+        case 'LOGIN_USER':
+            debugger
+            return {
+                ...state,
+                userName: action.payload.username,
+                email: action.payload.email
             }
         default:
             return state;
     }
 }
+
+export default userReducer;

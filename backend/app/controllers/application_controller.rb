@@ -28,8 +28,7 @@ class ApplicationController < ActionController::Base
     end
 
     def token_decode(token)
-        body = JWT.decode(token, Rails.application.secrets.secret_key_base)
-        HashWithIndifferentAccess.new(body)
+        JWT.decode(token, Rails.application.secrets.secret_key_base)[0]
     end
 
     helper_method :give_token, :logged_in?, :current_user, :authorized?, :token_encode, :token_decode
