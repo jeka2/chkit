@@ -2,6 +2,7 @@ const INITIAL_STATE = {
     loggedIn: false,
     userName: '',
     email: '',
+    id: null,
 }
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -12,12 +13,14 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 loggedIn: !state.loggedIn
             }
         case 'LOGIN_USER':
-            debugger
+            const userName = action.payload.username;
+            const { id, email } = action.payload;
             return {
-                ...state,
-                userName: action.payload.username,
-                email: action.payload.email
+                ...state, userName, id, email
             }
+        case 'AUTHENTICATE':
+            if(state.id !== action.payload.id) 
+                state = INITIAL_STATE
         default:
             return state;
     }

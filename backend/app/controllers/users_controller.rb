@@ -3,14 +3,12 @@ class UsersController < ApplicationController
     def create
         @user = User.new(user_params)
         if @user.save
-            give_token
             render json: { 
                 status: 201,
-                user: @user.slice(:created_at, :email, :id, :username),
+                user: @user,
                 token: token_encode({ user_id: @user.id })
             }
         else
-            binding.pry
             render json: {
                 status: 500,
                 errors: @user.errors.full_messages
@@ -37,6 +35,6 @@ class UsersController < ApplicationController
 private 
 
     def user_params 
-        params.require(:user).permit(:username, :password, :password_confirmation)
+        params.require(:user).permit(:username, :password, :password_confirmation, :email)
     end
 end

@@ -18,7 +18,6 @@ class SessionsController < ApplicationController
     end
 
     def destroy
-        revoke_token
         render json: {
             status: 200,
             logged_out: true
@@ -26,14 +25,19 @@ class SessionsController < ApplicationController
     end
 
     def authenticate
-        if logged_in?
-            token_decode(params[:token])
-            # token decode should return proper user id
-            # then see if current_users session_id matches
+        binding.pry
+        user_id = retrieve_user_from_token(params[:token]) if params[:token]
+        user = User.find_by_id(user_id)
+
+        if user
+            render json: {
+                status: 200,
+                user: user.attributes_to_send
+            }
         else
             render json: {
                 status: 400,
-                errors: ['Please Log In']
+                errors: ['Something went wrong']
             }
         end
     end
@@ -41,5 +45,15 @@ class SessionsController < ApplicationController
 private
     def session_params
         params.require(:user).permit(:username, :password)
+    end
+
+    def retrieve_user_from_token(token)
+        begin
+            user_id = token_decode(token)["user_id"]
+        rescue Exception => error
+            return nil
+        else
+            return user_id
+        end
     end
 end
