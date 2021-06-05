@@ -19,7 +19,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 ...state, userName, id, email
             }
         case 'AUTHENTICATE':
-            if(state.id !== action.payload.id) 
+            if(state.id != action.payload.id) 
                 state = INITIAL_STATE
         default:
             return state;

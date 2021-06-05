@@ -1,9 +1,10 @@
-import './App.css';
+import './App.scss';
 import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import TestComponent from './components/text.component';
 import { authenticateUser, createUser } from './redux/user/user.actions';
+import FrontPage from './pages/front-page/front-page.component';
 
 class App extends React.Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class App extends React.Component {
         <button onClick={() => this.props.authenticateUser()}>Authenticate User</button>
         <Router>
           <Switch>
-            <Route exact path='/' component={TestComponent} />
+            <Route exact path='/' component={FrontPage} />
             <Route exact path='/login' component={TestComponent} />
             <Route exact path='/signup' component={TestComponent} />
           </Switch>
