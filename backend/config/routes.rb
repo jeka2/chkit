@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  resources :users, only: [:create, :show]
+  resources :users, only: [:create, :show] do 
+    resources :posts, only: [:index, :show, :create, :destroy]
+  end
+
+  resources :categories, only: [:show] do
+    resources :posts, only: [:index]
+  end
 
   post '/login', to: 'sessions#create'
   post '/logout', to: 'sessions#destroy'
