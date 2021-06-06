@@ -1,0 +1,10 @@
+.front-page {
+    display: flex;
+    flex-direction: column;
+
+    .post-container {
+        border: 1px solid black;
+        margin: 10px 0 10px 15%;
+        background-color: rgb(247, 244, 244)
+    }
+}

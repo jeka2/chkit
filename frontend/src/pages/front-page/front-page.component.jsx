@@ -6,6 +6,7 @@ import { getPosts } from '../../redux/post/post.actions';
 import { createStructuredSelector } from 'reselect';
 
 import { selectPostsToDisplay } from '../../redux/post/post.selectors';
+import './front-page.styles.scss';
 
 class FrontPage extends React.Component{
     constructor(props) {
@@ -23,6 +24,7 @@ class FrontPage extends React.Component{
     render(){
         return(
             <div className="front-page">
+                <div className="posts-container">
                         <button onClick={() => this.props.getPosts()}>Get Posts</button>
                 {
                     !this.props.postsToDisplay ? null 
@@ -31,6 +33,7 @@ class FrontPage extends React.Component{
                         <Post key={ id } {...otherData} />
                     ))
                 }
+                </div>
             </div>
         )
     }

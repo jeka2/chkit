@@ -1,0 +1,22 @@
+.post-container {
+    position: relative;
+    min-width: 600px;
+    width: 40%;
+    margin-left: 50px;
+
+    .header {
+        padding: 10px 10px 0 10px;
+        font-size: 23px;
+    }
+
+    .content {
+        padding: 10px 10px 0 10px;
+        font-size: 15px;
+        height: 100px;
+    }
+
+    .footer {
+        padding-bottom: 0;
+        padding-top: 3px;
+    }
+}
