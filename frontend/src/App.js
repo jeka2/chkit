@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import TestComponent from './components/text.component';
 import { authenticateUser, createUser } from './redux/user/user.actions';
+import { getPosts } from './redux/post/post.actions';
 import FrontPage from './pages/front-page/front-page.component';
 
 class App extends React.Component {
@@ -39,6 +40,7 @@ class App extends React.Component {
       <div>
         <button onClick={() => this.props.createUser()}>Create User</button>
         <button onClick={() => this.props.authenticateUser()}>Authenticate User</button>
+        <button onClick={() => this.props.getPosts()}>Get Posts</button>
         <Router>
           <Switch>
             <Route exact path='/' component={FrontPage} />
@@ -51,4 +53,4 @@ class App extends React.Component {
   }
 }
 
-export default connect(null, { authenticateUser, createUser })(App);
+export default connect(null, { authenticateUser, createUser, getPosts })(App);

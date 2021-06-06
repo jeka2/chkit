@@ -1,5 +1,6 @@
 const INITIAL_STATE = {
     currentType: 'general',
+    postsToDisplay: []
 }
 
 const postReducer = (state = INITIAL_STATE, action) => {
@@ -10,9 +11,14 @@ const postReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 currentType
             }
+        case 'LOAD_POSTS':
+            return {
+                ...state,
+                postsToDisplay: action.payload
+            }
         default:
             return {state}
     }
-}
+};
 
 export default postReducer;
