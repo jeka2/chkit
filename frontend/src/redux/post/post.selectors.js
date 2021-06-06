@@ -6,3 +6,8 @@ export const selectPostsToDisplay = createSelector(
     [selectPost],
     post => post.postsToDisplay
 )
+
+export const getNumberOfPages = createSelector(
+    [selectPost],
+    post => post.paginationNumber
+)

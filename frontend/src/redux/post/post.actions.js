@@ -6,6 +6,7 @@ export const getPosts = ({ page, category }) => {
         }).then(res => res.json())
             .then(data => {
                 dispatch({type: 'LOAD_POSTS', payload: data.posts})
+                dispatch({type: 'SET_PAGES', payload: data.pages})
             });
     }
 }

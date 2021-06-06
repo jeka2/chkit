@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { Post } from '../../components/post/post.component';
+import Post from '../../components/post/post.component';
 import { getPosts } from '../../redux/post/post.actions';
+import { Paginator} from '../../components/paginator/paginator.component';
 import { createStructuredSelector } from 'reselect';
 
-import { selectPostsToDisplay } from '../../redux/post/post.selectors';
+import { selectPostsToDisplay, getNumberOfPages } from '../../redux/post/post.selectors';
 import './front-page.styles.scss';
 
 class FrontPage extends React.Component{
@@ -14,11 +15,12 @@ class FrontPage extends React.Component{
 
         this.state = {
             currentPage: 1,
+            viewedCategory: 'general'
         }
     }
 
     componentDidMount() {
-        this.props.getPosts({page: 1, category: 'general'})
+        this.props.getPosts({page: this.state.currentPage, category: this.state.viewedCategory});
     }
 
     render(){
@@ -29,18 +31,24 @@ class FrontPage extends React.Component{
                 {
                     !this.props.postsToDisplay ? null 
                         : 
-                    this.props.postsToDisplay.map(({id, ...otherData}) => (
-                        <Post key={ id } {...otherData} />
+                    this.props.postsToDisplay.map((data) => (
+                        <Post key={ data.id } {...data} />
                     ))
                 }
                 </div>
+                <Paginator getPage={ this.props.getPosts } 
+                    numberOfPages={ this.props.numberOfPages } currentPage={ this.state.currentPage }
+                    category={ this.state.viewedCategory }  />
             </div>
         )
     }
 };
 
-const mapStateToProps = state => ({
-    postsToDisplay: selectPostsToDisplay(state),
-})
+const mapStateToProps = state => (
+    { 
+        postsToDisplay: selectPostsToDisplay(state),
+        numberOfPages: state.post.paginationNumber 
+    }
+)
 
 export default connect(mapStateToProps, { getPosts })(FrontPage);

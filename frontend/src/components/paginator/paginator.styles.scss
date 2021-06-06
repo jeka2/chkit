@@ -1,0 +1,15 @@
+.pagination {
+    margin: auto;
+
+    .page-link {
+        border: 1px solid black;
+        border-radius: 6px;
+        padding: 5px 5px;
+        margin: 0 4px 6px 4px;
+
+        &:hover {
+            background-color: rgb(170, 160, 160);
+            cursor: pointer;
+        }
+    }
+}

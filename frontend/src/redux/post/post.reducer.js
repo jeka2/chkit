@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
     currentType: 'general',
-    postsToDisplay: []
+    postsToDisplay: [],
+    paginationNumber: 1
 }
 
 const postReducer = (state = INITIAL_STATE, action) => {
@@ -15,6 +16,11 @@ const postReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 postsToDisplay: action.payload
+            }
+        case 'SET_PAGES':
+            return {
+                ...state,
+                paginationNumber: action.payload
             }
         default:
             return {state}
