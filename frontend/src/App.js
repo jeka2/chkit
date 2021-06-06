@@ -40,7 +40,6 @@ class App extends React.Component {
       <div>
         <button onClick={() => this.props.createUser()}>Create User</button>
         <button onClick={() => this.props.authenticateUser()}>Authenticate User</button>
-        <button onClick={() => this.props.getPosts()}>Get Posts</button>
         <Router>
           <Switch>
             <Route exact path='/' component={FrontPage} />
@@ -53,4 +52,4 @@ class App extends React.Component {
   }
 }
 
-export default connect(null, { authenticateUser, createUser, getPosts })(App);
+export default connect(null, { authenticateUser, createUser })(App);

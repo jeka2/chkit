@@ -1,11 +1,11 @@
 import React from 'react';
 import './post.styles.scss';
 
-export const Post = ({ header, mainBody, footer, imageUrl }) => (
-    <div className="post-container">
-        <div className="header">HEADER</div>
-        <div className="main-body">BODY</div>
+export const Post = ({ content, likes, dislikes, title, views }) => {
+    return <div className="post-container">
+        <div className="header">{ title }</div>
+        <div className="main-body">{ content }</div>
         <div className="footer">FOOTER</div>
     </div>
-)
+}
 

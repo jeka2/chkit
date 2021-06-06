@@ -3,10 +3,15 @@ class PostsController < ApplicationController
 
     def index 
         category = Category.friendly.find_by(name: params[:category_id])
+        page = params[:page_id]
+        item_offset = (page.to_i - 1) * 10 
 
+        posts = category.posts.offset(item_offset).first(10)
+
+    
         if category 
             render json: {
-                posts: category.posts
+                posts: posts
             } 
         else
             render json: {

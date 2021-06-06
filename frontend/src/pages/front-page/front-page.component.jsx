@@ -10,19 +10,26 @@ import { selectPostsToDisplay } from '../../redux/post/post.selectors';
 class FrontPage extends React.Component{
     constructor(props) {
         super(props);
+
+        this.state = {
+            currentPage: 1,
+        }
     }
 
     componentDidMount() {
-        this.props.getPosts();
+        this.props.getPosts({page: 1, category: 'general'})
     }
 
     render(){
         return(
             <div className="front-page">
+                        <button onClick={() => this.props.getPosts()}>Get Posts</button>
                 {
-                    this.props.postsToDisplay && this.props.postsToDisplay.forEach(postData => {
-                        console.log(postData)
-                    })
+                    !this.props.postsToDisplay ? null 
+                        : 
+                    this.props.postsToDisplay.map(({id, ...otherData}) => (
+                        <Post key={ id } {...otherData} />
+                    ))
                 }
             </div>
         )
