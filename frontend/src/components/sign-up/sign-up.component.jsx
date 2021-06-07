@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { createUser } from '../../redux/user/user.actions';
 
 import './sign-up.styles.scss';
 
@@ -7,7 +10,7 @@ class SignUp extends React.Component {
         super(props);
 
         this.state = {
-            email: '',
+            username: '',
             password: '',
             passwordConfirmation: ''
         }
@@ -16,7 +19,9 @@ class SignUp extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
 
-        
+        const { username, password, passwordConfirmation } = this.state;
+
+        this.props.createUser({ username, password, password_confirmation: passwordConfirmation })
     }
 
     handleChange = (e) => {
@@ -31,15 +36,15 @@ class SignUp extends React.Component {
                 <h2>Please Sign Up</h2>
                 <form className="sign-in-form" onSubmit={this.handleSubmit}>
                     <label>
-                        Email:
-                        <input type="text" name="email" onChange={ this.handleChange } value={this.state.email} />
+                        Username:
+                        <input type="text" name="username" onChange={ this.handleChange } value={this.state.username} />
                     </label>
                     <label>
                         Password:
                         <input type="password" name="password" onChange={ this.handleChange } value={this.state.password} />
                     </label>
                     <label>
-                        Password:
+                        Confirm Password:
                         <input type="password" name="passwordConfirmation" onChange={ this.handleChange } value={this.state.passwordConfirmation} />
                     </label>
                     <input className="submit-form" type="submit" value="Submit" />
@@ -49,4 +54,4 @@ class SignUp extends React.Component {
     }
 }
 
-export default SignUp;
+export default connect(null, { createUser })(SignUp);

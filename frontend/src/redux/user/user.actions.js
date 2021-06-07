@@ -1,16 +1,13 @@
 import { saveTokenToSession } from './user.utils';
 
-export const createUser = user => {
+export const createUser = ({ username, password, password_confirmation }) => {
+    debugger
     return dispatch => {
         fetch('http://localhost:3001/users', {
             method: "POST",
             headers: { Accept: "application/json", "Content-Type": "application/json" },
             body: JSON.stringify({ 
-                user: {  
-                    username: 'user20',
-                    password: 'password1',
-                    password_confirmation: 'password1'
-                } 
+                user: { username, password, password_confirmation}
             })
         }).then(res => res.json())
           .then(data => {
