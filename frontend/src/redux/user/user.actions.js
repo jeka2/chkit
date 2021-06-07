@@ -1,7 +1,6 @@
 import { saveTokenToSession } from './user.utils';
 
 export const createUser = ({ username, password, password_confirmation }) => {
-    debugger
     return dispatch => {
         fetch('http://localhost:3001/users', {
             method: "POST",
@@ -37,6 +36,24 @@ export const authenticateUser = user => {
                     dispatch({ type: 'AUTHENTICATE', payload: user})
                 }
             })
+    }
+}
+
+export const logUserIn = ({ username, password }) => {
+    return dispatch => {
+        fetch('http://localhost:3001/login', {
+            method: "POST",
+            headers: { Accept: "application/json", "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+                user: { username, password }
+            })
+        }).then(res => res.json())
+          .then(data => {
+              debugger
+              saveTokenToSession(data.token)
+              dispatch({ type: "LOGIN_USER", payload: data.user})
+              dispatch({ type: "TOGGLE_SIGNED_IN"})
+          })
     }
 }
 

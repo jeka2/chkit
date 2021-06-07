@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import { withRouter } from 'react-router';
 import { createUser } from '../../redux/user/user.actions';
 
 import './sign-up.styles.scss';
@@ -22,6 +22,8 @@ class SignUp extends React.Component {
         const { username, password, passwordConfirmation } = this.state;
 
         this.props.createUser({ username, password, password_confirmation: passwordConfirmation })
+
+        this.props.history.push({pathname: `/`})
     }
 
     handleChange = (e) => {
@@ -54,4 +56,4 @@ class SignUp extends React.Component {
     }
 }
 
-export default connect(null, { createUser })(SignUp);
+export default withRouter(connect(null, { createUser })(SignUp));
