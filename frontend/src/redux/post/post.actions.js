@@ -12,7 +12,6 @@ export const getPosts = ({ page, category }) => {
 };
 
 export const modifyRating = (post_id, type) => {
-    debugger
     return dispatch => {
         fetch(`http://localhost:3001/ratings`, {
             method: "POST",
