@@ -35,3 +35,14 @@ end
     Post.update(random_post_id, :score => random_post.score + change)
     Rating.create(user_id: random_user_id, post_id: random_post_id, rating_type: type)
 }
+
+10.times do |count| 
+    post = Post.find(count + 1)
+
+    1.upto(10) {
+        offset = rand(User.count)
+        random_user_id = User.offset(offset).first.id
+
+        Comment.create(post_id: post.id, user_id: random_user_id, content: Faker::Lorem.sentence(word_count: 20))
+    }
+end

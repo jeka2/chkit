@@ -1,7 +1,8 @@
 const INITIAL_STATE = {
     currentType: 'general',
     postsToDisplay: [],
-    paginationNumber: 1
+    paginationNumber: 1,
+    onDisplay: null
 }
 
 const postReducer = (state = INITIAL_STATE, action) => {
@@ -23,14 +24,21 @@ const postReducer = (state = INITIAL_STATE, action) => {
                 paginationNumber: action.payload
             }
         case 'MODIFY_POST_RATING':
-            const post = state.postsToDisplay.find(el => el.id === 
+            let post;
+            if(state.onDisplay) { // If the rating pertains to post currently being viewed
+                post = state.onDisplay;
+            } else { // If on the page with many posts
+                post = state.postsToDisplay.find(el => el.id === 
                     action.payload.postId)
-    
+            }
             post.score = action.payload.score;
-            debugger
             return {
                 ...state,
-                
+            }
+        case 'SET_POST_ON_DISPLAY':
+            return {
+                ...state,
+                onDisplay: action.payload.post
             }
         default:
             return {state}

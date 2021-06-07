@@ -1,0 +1,9 @@
+.post-container {
+    background-color: blue;
+    position: relative;
+    margin-left: 20%;
+    
+    .post {
+        min-height: 400px;
+    }
+}

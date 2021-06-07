@@ -14,5 +14,7 @@ export const getNumberOfPages = createSelector(
 
 export const selectCurrentPostScore = createSelector(
     [selectPost],
-    post => {debugger}
+    post => {
+        return post.onDisplay && post.onDisplay.score
+    }
 )

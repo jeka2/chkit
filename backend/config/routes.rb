@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     resources :posts, only: [:index]
   end
 
+  resources :posts, only: [:show]
+
   resources :ratings, only: [:create, :update]
 
   post '/login', to: 'sessions#create'

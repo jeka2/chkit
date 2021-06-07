@@ -28,7 +28,17 @@ class PostsController < ApplicationController
     end
 
     def show
+        post = Post.find(params[:id])
 
+        if post
+            render json: {
+                post: post
+            }
+        else
+            render json: {
+                errors: ['Something went wrong']
+            }
+        end
     end
 
     def destroy 

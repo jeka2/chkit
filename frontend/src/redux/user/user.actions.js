@@ -7,7 +7,7 @@ export const createUser = user => {
             headers: { Accept: "application/json", "Content-Type": "application/json" },
             body: JSON.stringify({ 
                 user: {  
-                    username: 'user12',
+                    username: 'user20',
                     password: 'password1',
                     password_confirmation: 'password1'
                 } 
@@ -28,7 +28,7 @@ export const authenticateUser = user => {
                 method: "POST",
                 headers: { Accept: "application/json", "Content-Type": "application/json" },
                 body: JSON.stringify({ 
-                    token: sessionStorage.getItem('user-token') || 'token'
+                    token: sessionStorage.getItem('user-token')
                 })
             }).then(res => res.json())
             .then((data) => {
