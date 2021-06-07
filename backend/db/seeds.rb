@@ -8,7 +8,7 @@ end
     User.create(username: "user#{count}", email: "email#{count}", password: "password")
 end
 
-1.upto(1000) {
+1.upto(100) {
     offset = rand(User.count)
     random_user_id = User.offset(offset).first.id
 
@@ -17,5 +17,21 @@ end
     
 
     Post.create(title: Faker::Nation.capital_city, content: Faker::Lorem.sentence, 
-                user_id: random_user_id, category_id: random_category_id, views: 0, likes: 0, dislikes: 0)
+                user_id: random_user_id, category_id: random_category_id, views: 0, score: 0)
+}
+
+1.upto(10000) {
+    offset = rand(User.count)
+    random_user_id = User.offset(offset).first.id
+
+    offset = rand(Post.count)
+    random_post = Post.offset(offset).first
+    random_post_id = random_post.id
+
+    type = rand(5) > 1 ? 'increase' : 'decrease'
+
+    change = type == 'increase' ? 1 : -1
+
+    Post.update(random_post_id, :score => random_post.score + change)
+    Rating.create(user_id: random_user_id, post_id: random_post_id, rating_type: type)
 }

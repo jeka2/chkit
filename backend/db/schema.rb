@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_05_201330) do
+ActiveRecord::Schema.define(version: 2021_06_06_205601) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -36,13 +36,23 @@ ActiveRecord::Schema.define(version: 2021_06_05_201330) do
     t.text "content"
     t.integer "user_id", null: false
     t.integer "category_id", null: false
-    t.integer "views"
-    t.integer "likes"
-    t.integer "dislikes"
+    t.integer "views", default: 0
+    t.integer "score", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "post_id", null: false
+    t.string "rating_type"
+    t.integer "score"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_ratings_on_post_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,4 +65,6 @@ ActiveRecord::Schema.define(version: 2021_06_05_201330) do
 
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users"
+  add_foreign_key "ratings", "posts"
+  add_foreign_key "ratings", "users"
 end

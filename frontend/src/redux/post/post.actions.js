@@ -9,4 +9,18 @@ export const getPosts = ({ page, category }) => {
                 dispatch({type: 'SET_PAGES', payload: data.pages})
             });
     }
+};
+
+export const modifyRating = ({ user, post }) => {
+    return dispatch => {
+        fetch(`url`, {
+            method: "POST",
+            headers: { Accept: "application/json", "Content-Type": "application/json" },
+        }).then(res => res.json())
+            .then(data => {
+                // dispatch authentication
+                
+            });
+    }
 }
+

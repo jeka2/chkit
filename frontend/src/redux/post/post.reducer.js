@@ -22,6 +22,10 @@ const postReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 paginationNumber: action.payload
             }
+        case 'MODIFY_POST_RATING':
+            return {
+                ...state
+            }
         default:
             return {state}
     }

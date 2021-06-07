@@ -14,7 +14,7 @@ class Post extends React.Component {
 
     modifyRating = (type) => {
         if(type === 'increase') {
-           
+           console.log(this.props)
         } else {
 
         }
@@ -25,13 +25,13 @@ class Post extends React.Component {
             <div className="post-container">
                 <div className="header">{ this.props.title }</div>
                 <PostContent>{ this.props.content }</PostContent>
-                <Footer modifyRating={ this.modifyRating }/>
+                <Footer score={ this.props.score } modifyRating={ this.modifyRating }/>
             </div>
         )
     }
 };
 
-export default Post;
+export default connect()(Post);
 
 
 

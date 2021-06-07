@@ -5,9 +5,8 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.text :content
       t.references :user, null: false, foreign_key: true
       t.references :category, null: false, foreign_key: true
-      t.integer :views
-      t.integer :likes
-      t.integer :dislikes
+      t.integer :views, default: 0
+      t.integer :score, default: 0
 
       t.timestamps
     end
