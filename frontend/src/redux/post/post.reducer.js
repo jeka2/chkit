@@ -23,8 +23,14 @@ const postReducer = (state = INITIAL_STATE, action) => {
                 paginationNumber: action.payload
             }
         case 'MODIFY_POST_RATING':
+            const post = state.postsToDisplay.find(el => el.id === 
+                    action.payload.postId)
+    
+            post.score = action.payload.score;
+            debugger
             return {
-                ...state
+                ...state,
+                
             }
         default:
             return {state}

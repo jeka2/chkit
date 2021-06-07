@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     resources :posts, only: [:index]
   end
 
+  resources :ratings, only: [:create, :update]
+
   post '/login', to: 'sessions#create'
   post '/logout', to: 'sessions#destroy'
 

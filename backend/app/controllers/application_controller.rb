@@ -31,6 +31,17 @@ class ApplicationController < ActionController::Base
         JWT.decode(token, Rails.application.secrets.secret_key_base)[0]
     end
 
-    helper_method :give_token, :logged_in?, :current_user, :authorized?, :token_encode, :token_decode
+    def retrieve_user_from_token(token)
+        begin
+            user_id = token_decode(token)["user_id"]
+        rescue Exception => error
+            return nil
+        else
+            return user_id
+        end
+    end
+
+    helper_method :give_token, :logged_in?, :current_user, :authorized?, :token_encode, :token_decode,
+        :retrieve_user_from_token
 
 end

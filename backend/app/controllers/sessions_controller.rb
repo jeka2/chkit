@@ -25,7 +25,6 @@ class SessionsController < ApplicationController
     end
 
     def authenticate
-        binding.pry
         user_id = retrieve_user_from_token(params[:token]) if params[:token]
         user = User.find_by_id(user_id)
 
@@ -47,13 +46,4 @@ private
         params.require(:user).permit(:username, :password)
     end
 
-    def retrieve_user_from_token(token)
-        begin
-            user_id = token_decode(token)["user_id"]
-        rescue Exception => error
-            return nil
-        else
-            return user_id
-        end
-    end
 end

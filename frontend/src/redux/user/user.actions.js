@@ -7,7 +7,7 @@ export const createUser = user => {
             headers: { Accept: "application/json", "Content-Type": "application/json" },
             body: JSON.stringify({ 
                 user: {  
-                    username: 'user43',
+                    username: 'user12',
                     password: 'password1',
                     password_confirmation: 'password1'
                 } 

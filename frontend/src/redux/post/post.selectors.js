@@ -11,3 +11,8 @@ export const getNumberOfPages = createSelector(
     [selectPost],
     post => post.paginationNumber
 )
+
+export const selectCurrentPostScore = createSelector(
+    [selectPost],
+    post => {debugger}
+)

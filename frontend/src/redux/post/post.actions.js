@@ -11,15 +11,26 @@ export const getPosts = ({ page, category }) => {
     }
 };
 
-export const modifyRating = ({ user, post }) => {
+export const modifyRating = (post_id, type) => {
+    debugger
     return dispatch => {
-        fetch(`url`, {
+        fetch(`http://localhost:3001/ratings`, {
             method: "POST",
             headers: { Accept: "application/json", "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+                token: sessionStorage.getItem('user-token'),
+                post_id,
+                type
+            })
         }).then(res => res.json())
             .then(data => {
-                // dispatch authentication
-                
+                debugger
+                if(data.errors) {
+
+                }
+                else {
+                    dispatch({ type: 'MODIFY_POST_RATING', payload: { postId: data.post_id, score: data.post_score } })
+                }
             });
     }
 }
