@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
-
+import Header from './components/header/header.component';
 import TestComponent from './components/text.component';
 import { authenticateUser, createUser } from './redux/user/user.actions';
 import { getPosts } from './redux/post/post.actions';
@@ -44,9 +44,8 @@ class App extends React.Component {
   render() {
     return(
       <div>
-        <button onClick={() => this.props.createUser()}>Create User</button>
-        <button onClick={() => this.props.authenticateUser()}>Authenticate User</button>
         <Router history={history}>
+        <Header />
           <Switch>
             <Route exact path='/' component={FrontPage} />
             <Route exact path='/login' component={SignInSignUpPage} />

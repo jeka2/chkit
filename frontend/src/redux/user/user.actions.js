@@ -58,5 +58,7 @@ export const logUserIn = ({ username, password }) => {
 }
 
 export const logUserOut = user => {
-
+    return dispatch => {
+        dispatch({ type: 'LOGOUT_USER' })
+    }
 }

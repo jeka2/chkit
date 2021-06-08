@@ -27,7 +27,6 @@ class FrontPage extends React.Component{
         return(
             <div className="front-page">
                 <div className="posts-container">
-                        <button onClick={() => this.props.getPosts()}>Get Posts</button>
                 {
                     !this.props.postsToDisplay ? null 
                         : 

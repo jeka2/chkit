@@ -18,6 +18,10 @@ const userReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state, userName, id, email
             }
+        case 'LOGOUT_USER':
+            return {
+                ...INITIAL_STATE
+            }
         case 'AUTHENTICATE':
             if(state.id != action.payload.id) 
                 state = INITIAL_STATE
