@@ -49,7 +49,6 @@ export const logUserIn = ({ username, password }) => {
             })
         }).then(res => res.json())
           .then(data => {
-              debugger
               saveTokenToSession(data.token)
               dispatch({ type: "LOGIN_USER", payload: data.user})
               dispatch({ type: "TOGGLE_SIGNED_IN"})
